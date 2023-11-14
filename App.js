@@ -1,26 +1,16 @@
-import { StyleSheet, StatusBar, Text, View, Pressable } from "react-native";
-import { useCounterStore, selectCount, selectIncrement } from "./store/counterStore";
+import { StatusBar, View } from "react-native";
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: "#fff",
-        alignItems: "center",
-        justifyContent: "center",
-    },
-});
+import Header from "./components/Header";
+import Menu from "./components/Menu";
+import LoginForm from "./components/LoginForm";
 
 export default function App() {
-    const count = useCounterStore(selectCount);
-    const increment = useCounterStore(selectIncrement);
-
     return (
-        <View style={styles.container}>
+        <View style={{ flex: 1 }}>
             <StatusBar backgroundColor="white" barStyle="dark-content" />
-            <Text>Count: {count}</Text>
-            <Pressable onPress={() => increment(2323)}>
-                <Text>Click</Text>
-            </Pressable>
+            <Header />
+            <Menu />
+            <LoginForm />
         </View>
     );
 }
