@@ -15,13 +15,10 @@ const styles = StyleSheet.create({
         padding: 20,
     },
     logo: {
-        width: 300,
-        height: 300,
-        display: "flex",
-    },
-    logoImage: {
-        width: "100%",
-        height: "100%",
+        width: 240,
+        height: 106,
+        marginLeft: "auto",
+        marginRight: "auto",
     },
     label: {
         fontSize: 18,
@@ -32,19 +29,37 @@ const styles = StyleSheet.create({
         backgroundColor: "rgb(240, 240, 240)",
         borderRadius: 5,
     },
+    button: {
+        width: 120,
+        height: 35,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: 30,
+        marginLeft: "auto",
+        marginRight: "auto",
+        backgroundColor: "#ee3124",
+        borderRadius: 10,
+    },
+    buttonText: {
+        color: "white",
+        fontSize: 16,
+        fontWeight: "bold",
+    },
 });
 
 export default function LoginForm() {
     return (
         <View style={styles.container}>
             <View style={styles.block}>
-                <View style={styles.logo}>
-                    <Image style={styles.logoImage} source={Real2LogoImageSource} />
-                </View>
-                <Text style={styles.label}>Имя пользователя:</Text>
-                <TextInput style={[styles.inputField, { marginTop: 15, marginBottom: 20 }]} />
-                <Text style={styles.label}>Пароль:</Text>
+                <Image style={styles.logo} source={Real2LogoImageSource} />
+                <Text style={[styles.label, { marginTop: 50 }]}>Имя пользователя:</Text>
                 <TextInput style={[styles.inputField, { marginTop: 15 }]} />
+                <Text style={[styles.label, { marginTop: 20 }]}>Пароль:</Text>
+                <TextInput style={[styles.inputField, { marginTop: 15 }]} />
+                <Pressable style={styles.button}>
+                    <Text style={styles.buttonText}>Войти</Text>
+                </Pressable>
             </View>
         </View>
     );
