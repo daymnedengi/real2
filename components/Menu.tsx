@@ -1,27 +1,33 @@
 import { StyleSheet, View, Pressable, Text, Image } from "react-native";
 import { useMenuStore, selectShowMenu, selectToggleMenu } from "../store/menuStore";
+import { useNavigationStore, selectNavigate } from "../store/navigationStore";
 
+// @ts-ignore
 import CloseImageSource from "../assets/menu-close.png";
+// @ts-ignore
 import HomeImageSource from "../assets/menu-home.png";
+// @ts-ignore
 import ProfileImageSource from "../assets/menu-profile.png";
+// @ts-ignore
 import SettingsImageSource from "../assets/menu-settings.png";
+// @ts-ignore
 import LogoutImageSource from "../assets/menu-logout.png";
 
 const styles = StyleSheet.create({
     container: {
-        width: "100vw",
-        height: "100vh",
         position: "absolute",
         top: 0,
         left: 0,
-        backgroundColor: "rgba(225, 225, 225, 0.5)",
+        right: 0,
+        bottom: 0,
+        backgroundColor: "rgba(200, 200, 200, 0.5)",
         zIndex: 10,
     },
     block: {
-        width: "90%",
-        maxWidth: "350px",
-        height: "100%",
-        paddingTop: 30,
+        flex: 1,
+        maxWidth: 350,
+        marginRight: 50,
+        paddingTop: 50,
         position: "relative",
         backgroundColor: "white",
     },
@@ -54,9 +60,16 @@ const styles = StyleSheet.create({
     },
 });
 
-export default function Menu() {
+export default function Menu(): JSX.Element | null {
     const showMenu = useMenuStore(selectShowMenu);
     const toggleMenu = useMenuStore(selectToggleMenu);
+
+    const navigate = useNavigationStore(selectNavigate);
+
+    function goto(path: string) {
+        toggleMenu(false);
+        navigate(path);
+    }
 
     if (!showMenu) {
         return null;
@@ -70,19 +83,27 @@ export default function Menu() {
                 </Pressable>
                 <View style={styles.row}>
                     <Image style={styles.rowImage} source={HomeImageSource} />
-                    <Text style={styles.rowText}>Главная</Text>
+                    <Pressable onPress={() => goto("/")}>
+                        <Text style={styles.rowText}>Главная</Text>
+                    </Pressable>
                 </View>
                 <View style={styles.row}>
                     <Image style={styles.rowImage} source={ProfileImageSource} />
-                    <Text style={styles.rowText}>Профиль</Text>
+                    <Pressable onPress={() => goto("/profile")}>
+                        <Text style={styles.rowText}>Профиль</Text>
+                    </Pressable>
                 </View>
                 <View style={styles.row}>
                     <Image style={styles.rowImage} source={SettingsImageSource} />
-                    <Text style={styles.rowText}>Настройки</Text>
+                    <Pressable onPress={() => goto("/settings")}>
+                        <Text style={styles.rowText}>Настройки</Text>
+                    </Pressable>
                 </View>
                 <View style={styles.row}>
                     <Image style={styles.rowImage} source={LogoutImageSource} />
-                    <Text style={styles.rowText}>Выход</Text>
+                    <Pressable onPress={() => goto("/login")}>
+                        <Text style={styles.rowText}>Выход</Text>
+                    </Pressable>
                 </View>
             </View>
         </View>
