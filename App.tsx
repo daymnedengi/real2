@@ -1,4 +1,4 @@
-import { StatusBar, View, Text } from "react-native";
+import { StatusBar, View } from "react-native";
 import { useNavigationStore, selectPathName } from "./store/navigationStore";
 
 import Header from "./components/Header";
